@@ -1,0 +1,72 @@
+ # Python bytecode
+*.py[cod]
+__pycache__/
+*.so
+
+# Virtual environment
+venv/
+env/
+test/
+
+# Django specific files
+db.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+# Local settings
+.env
+settings_local.py
+
+# Media and static files
+media/
+staticfiles/
+static/
+
+# Migrations
+*/migrations/__pycache__/
+*/migrations/*.py[cod]
+
+# Testing
+test-results/
+coverage/
+htmlcov/
+.tox/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+*.mo
+*.decrypted
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# IDE-specific files
+.idea/
+*.iml
+
+# PyCharm
+*.idea/
+*.idea/**
+
+# JetBrains IDEs
+*.idea/
+.idea/*
+*.iml
+out/
+
+# Other
+*.bak
+*.swp
+
