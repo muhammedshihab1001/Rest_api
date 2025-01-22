@@ -1,41 +1,45 @@
-
 from rest_framework import serializers
-from people.models import Person
 from django.contrib.auth.models import User
+from people.models import Person
 
 class Rigesterserializer(serializers.ModelSerializer):
-    username=serializers.CharField()
-    email=serializers.EmailField()
-    password=serializers.CharField()
+    username = serializers.CharField()
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)  # Password should not be readable
 
     class Meta:
         model = User
-        fields = '__all__'
-    
+        fields = ['username', 'email', 'password']  # Only include the fields you need
+
     def validate(self, data):
-        if data['username']:
-            if User.objects.filter(username=data['username']).exists():
-                raise serializers.ValidationError('username already exists')
-            
-        if data['email']:
-            if User.objects.filter(email=data['email']).exists():
-                raise serializers.ValidationError('email already exists')
+        if User.objects.filter(username=data['username']).exists():
+            raise serializers.ValidationError('Username already exists')
+        
+        if User.objects.filter(email=data['email']).exists():
+            raise serializers.ValidationError('Email already exists')
+        
         return data
-    def create(self,vaildated_date):
-        user=User.objects.create(username=vaildated_date['username'],email=vaildated_date['email'])
-        user.set_password(vaildated_date['password'])
+
+    def create(self, validated_data):
+        user = User.objects.create(
+            username=validated_data['username'],
+            email=validated_data['email']
+        )
+        user.set_password(validated_data['password'])
         user.save()
-        return vaildated_date
+        return user  # Return the created user instance, not the validated data
 
 
-class loginserializer(serializers.ModelSerializer):
-    username=serializers.CharField()
-    password=serializers.CharField()
+class Loginserializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
     class Meta:
-        model = User
+        # No need for a model here since it's just for authentication
+        pass
+
+
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
         fields = '__all__'
-
-class Personserializer(serializers.ModelSerializer):
-    class Meta:
-        model=Person
-        fields='__all__'
