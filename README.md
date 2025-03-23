@@ -27,7 +27,7 @@ Follow these steps to set up and run the project locally.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/Rest_api.git
+git clone https://github.com/muhammedshihab1001/Rest_api.git
 cd Rest_api
 ```
 ### 2. Install dependencies
