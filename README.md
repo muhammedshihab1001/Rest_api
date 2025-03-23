@@ -34,7 +34,7 @@ cd Rest_api
   Make sure you have Python 3.x installed. Then, install the required Python packages:
 
 ```bash
-pip install -r requirements.txt
+pip install -r req.txt
 ```
 ### 3. Set up the database
 By default, the project uses SQLite, but you can configure other databases like PostgreSQL if needed. Run the following commands to apply the migrations and set up the database:
